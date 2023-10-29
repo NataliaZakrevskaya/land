@@ -1,0 +1,43 @@
+.header {
+  padding: 37px 0 33px;
+  margin: 0 auto;
+  width: var(--container-width);
+  max-width: var(--container-width);
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+
+  &_withoutLine{
+    text-decoration: none;
+  }
+
+  &_item{
+    cursor: pointer;
+    color: var(--color-text-title);
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    a{
+      color: var(--color-text-title);
+    }
+  }
+}
+
+@media (max-width: 639px) {
+  .header {
+    width: 100%;
+    max-width: 100%;
+    padding: 23px 20px 28px;
+  }
+
+  .nav{
+    &_withoutLine{
+      display: none;
+    }
+  }
+}
