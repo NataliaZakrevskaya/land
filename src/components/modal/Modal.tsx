@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import styles from './Modal.module.scss'
 import useClickOutside from "../../hooks/useClickOutside";
 import {CloseSvg} from "../../static/svg";
+import classNames from "classnames";
 
 interface IProps{
   close: () => void
@@ -72,7 +73,9 @@ const Modal = ({close}: IProps) => {
               </p>
               <a
                 href={`mailto:Aerokz@gmail.com?body=${encodeURIComponent(mailto)}`}
-                className={styles.btn}
+                className={classNames(styles.btn, {
+                  [styles.btn_disabled]: name.length === 0 || telegram.length === 0
+                })}
               >Отправить заявку</a>
             </div>
 
