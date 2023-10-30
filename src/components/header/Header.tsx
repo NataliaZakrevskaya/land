@@ -1,5 +1,5 @@
 import React from 'react';
-import {ArrowRightSmall, LogoBlack} from "../../static/svg";
+import {ArrowRightSmall} from "../../static/svg";
 import {navTabs} from "../../mock";
 import styles from './Header.module.scss'
 import classNames from "classnames";
@@ -7,7 +7,9 @@ import classNames from "classnames";
 const Header = () => {
   return (
     <header className={styles.header}>
-      <LogoBlack/>
+      <div className={styles.logo}>
+        <img src="logo.png" alt="logo"/>
+      </div>
       <nav className={styles.nav}>
         {navTabs
           .map(tab => {

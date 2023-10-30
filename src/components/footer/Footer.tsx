@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Footer.module.scss'
-import {ArrowRightSmall, LogoWhite} from "../../static/svg";
+import {ArrowRightSmall} from "../../static/svg";
 import {navTabs} from "../../mock";
 import classNames from "classnames";
 
@@ -8,7 +8,9 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.content}>
-        <LogoWhite/>
+       <div className={styles.logo}>
+         <img src="logo-white.png" alt="logo"/>
+       </div>
         <nav className={styles.nav}>
           {navTabs
             .map(tab => {

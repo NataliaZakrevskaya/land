@@ -1,5 +1,3 @@
-export * from './LogoWhite'
-export * from './LogoBlack'
 export * from './ArrowRightSmall'
 export * from './ArrowLeftBig'
 export * from './LikeSvg'
