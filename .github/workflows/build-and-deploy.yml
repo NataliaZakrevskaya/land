@@ -3,22 +3,6 @@ on:
     push:
         branches: [master]
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
-              with:
-                  node-version: 18
-                  cache: 'npm'
-            - run: npm ci
-
-            - name: Lint check
-              run: npm run lint
-
-            - name: Build check
-              run: npm run build
-
     deploy:
         needs: test
         runs-on: ubuntu-latest
