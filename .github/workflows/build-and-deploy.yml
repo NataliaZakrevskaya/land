@@ -1,0 +1,52 @@
+name: Build test
+on:
+    push:
+        branches: [master]
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  cache: 'npm'
+            - run: npm ci
+
+            - name: Lint check
+              run: npm run lint
+
+            - name: Build check
+              run: npm run build
+
+    deploy:
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+            - name: Open ssh connection with Sellershub reports server
+              env:
+                  USER: ${{ secrets.SSH_USER }}
+                  HOST: ${{ secrets.SSH_HOST }}
+                  PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+                  PORT: ${{ secrets.SSH_PORT}}
+              run: |
+                  mkdir -p ~/.ssh/
+                  echo "$PRIVATE_KEY" > ~/.ssh/private.key
+                  chmod 600 ~/.ssh/private.key
+                  cat >>~/.ssh/config <<END
+                  Host staging
+                    HostName $HOST
+                    User $USER
+                    IdentityFile ~/.ssh/private.key
+                    Port $PORT
+                    StrictHostKeyChecking no
+                  END
+
+            - name: Checkout to branch
+              run: ssh staging "~/home/land/scripts/checkout.sh"
+
+            - name: Rebuild app
+              run: ssh staging "~/home/land/scripts/build-image-script.sh"
+
+            - name: Run APP
+              run: ssh staging "~/home/land/scripts/run-image.script.sh"
