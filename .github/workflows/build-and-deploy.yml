@@ -4,7 +4,6 @@ on:
         branches: [master]
 jobs:
     deploy:
-        needs: test
         runs-on: ubuntu-latest
         steps:
             - name: Open ssh connection with Sellershub reports server
